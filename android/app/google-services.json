@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "951731953722",
+    "project_id": "schooldis-fe0d5",
+    "storage_bucket": "schooldis-fe0d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951731953722:android:4b6c3cd509829fbe6b9503",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951731953722-oitdk59unf8vug8ci5bcgo631ra0c1a3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4yMYerXXRjWpFwXbUNxRpk2wD7ee0hmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951731953722-oitdk59unf8vug8ci5bcgo631ra0c1a3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "951731953722-61m1kofkn6hn6no7758op173ejq2j3r6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
