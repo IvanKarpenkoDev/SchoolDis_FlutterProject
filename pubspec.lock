@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.18"
+  animated_snack_bar:
+    dependency: "direct main"
+    description:
+      name: animated_snack_bar
+      sha256: "12459c60530f6652e93adfafa24b0ff8d8dc44ad7be01103cb4370f3776435d5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0"
   async:
     dependency: transitive
     description:
@@ -152,6 +160,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      sha256: "2ba20a47c8f1f233bed775ba2dd0d3ac97b4cf32fc17731b3dfc672b06b0e92a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.6.5"
   http_parser:
     dependency: transitive
     description:
@@ -184,6 +200,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  m_toast:
+    dependency: "direct main"
+    description:
+      name: m_toast
+      sha256: "9b9096625a58da18341ba7d46f38b23a21a0be723aab008e1b5cfff71980f881"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   matcher:
     dependency: transitive
     description:
@@ -208,6 +232,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
+  motion_toast:
+    dependency: "direct main"
+    description:
+      name: motion_toast
+      sha256: "4ceb09cbc85443b73262b9ff3f924c6129270730b251277f94e41c5c29cc0fa6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.5"
   nested:
     dependency: transitive
     description:
@@ -240,6 +272,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.5"
+  settings_ui:
+    dependency: "direct main"
+    description:
+      name: settings_ui
+      sha256: d9838037cb554b24b4218b2d07666fbada3478882edefae375ee892b6c820ef3
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   sky_engine:
     dependency: transitive
     description: flutter
