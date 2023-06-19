@@ -1,0 +1,359 @@
+@startuml
+set namespaceSeparator ::
+
+class "flutter_application_1::firebase_options.dart::DefaultFirebaseOptions" {
+  {static} +FirebaseOptions web
+  {static} +FirebaseOptions android
+  {static} +FirebaseOptions ios
+  {static} +FirebaseOptions macos
+  {static} +FirebaseOptions currentPlatform
+}
+
+"flutter_application_1::firebase_options.dart::DefaultFirebaseOptions" o-- "firebase_core_platform_interface::firebase_core_platform_interface.dart::FirebaseOptions"
+
+class "flutter_application_1::screens::NewRegister.dart::SignUpPageNew" {
+  +_SignUpPageNewState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::NewRegister.dart::SignUpPageNew"
+
+class "flutter_application_1::screens::NewRegister.dart::_SignUpPageNewState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::NewRegister.dart::_SignUpPageNewState"
+
+class "flutter_application_1::screens::supportPage.dart::SupportPage" {
+  +_SupportPageState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::supportPage.dart::SupportPage"
+
+class "flutter_application_1::screens::supportPage.dart::_SupportPageState" {
+  -TextEditingController _nameController
+  -TextEditingController _emailController
+  -TextEditingController _messageController
+  -Future<void> _sendEmail()
+  +Widget build()
+}
+
+"flutter_application_1::screens::supportPage.dart::_SupportPageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::supportPage.dart::_SupportPageState"
+
+class "flutter_application_1::screens::cursePage.dart::CursePage" {
+  +String idCurs
+  +Widget build()
+  +Widget logo()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_application_1::screens::cursePage.dart::CursePage"
+
+class "flutter_application_1::screens::cursePage.dart::ClassList" {
+  +String idCurs
+  +State<ClassList> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::cursePage.dart::ClassList"
+
+class "flutter_application_1::screens::cursePage.dart::_ClassListState" {
+  -TextEditingController _searchController
+  +String searchQuery
+  -void _handleSearch()
+  +dynamic launchUrl1()
+  +Widget build()
+}
+
+"flutter_application_1::screens::cursePage.dart::_ClassListState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::cursePage.dart::_ClassListState"
+
+class "flutter_application_1::screens::home.dart::HomePage" {
+  +Future<String?> getDocumentUid()
+  +Widget build()
+  +Widget logo()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_application_1::screens::home.dart::HomePage"
+
+class "flutter_application_1::screens::home.dart::ClassList" {
+  +State<ClassList> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::home.dart::ClassList"
+
+class "flutter_application_1::screens::home.dart::_ClassListState" {
+  -Map<String, bool> _favorites
+  +String? uidUser
+  +void initState()
+  +void dispose()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::home.dart::_ClassListState"
+
+class "flutter_application_1::screens::home.dart::Profiles" {
+  +String? uid
+  +Future<String?> getDocumentUid()
+  +Future<int?> getRole()
+}
+
+class "flutter_application_1::screens::auth.dart::Autorization" {
+  +_AutorizationState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::auth.dart::Autorization"
+
+class "flutter_application_1::screens::auth.dart::_AutorizationState" {
+  -TextEditingController _emailController
+  -TextEditingController _passwordController
+  -String _email
+  -String _password
+  +bool showLogin
+  +bool signInChek
+  +Widget build()
+}
+
+"flutter_application_1::screens::auth.dart::_AutorizationState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::auth.dart::_AutorizationState"
+
+class "flutter_application_1::screens::auth.dart::BottomWaveClipper" {
+  +Path getClip()
+  +bool shouldReclip()
+}
+
+"flutter::src::rendering::proxy_box.dart::CustomClipper" <|-- "flutter_application_1::screens::auth.dart::BottomWaveClipper"
+
+class "flutter_application_1::screens::auth.dart::TopWaveClipper" {
+  +Path getClip()
+  +bool shouldReclip()
+}
+
+"flutter::src::rendering::proxy_box.dart::CustomClipper" <|-- "flutter_application_1::screens::auth.dart::TopWaveClipper"
+
+class "flutter_application_1::screens::profile.dart::Profile" {
+  +_ProfileState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::profile.dart::Profile"
+
+class "flutter_application_1::screens::profile.dart::_ProfileState" {
+  -GlobalKey<ScaffoldState> _scaffoldKey
+  -TextEditingController _fio
+  -TextEditingController _email
+  -TextEditingController _class
+  +void initState()
+  -Future<void> _fetchData()
+  -void _showBottomSheet()
+  -Widget _input()
+  +Widget build()
+}
+
+"flutter_application_1::screens::profile.dart::_ProfileState" o-- "flutter::src::widgets::framework.dart::GlobalKey<ScaffoldState>"
+"flutter_application_1::screens::profile.dart::_ProfileState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::profile.dart::_ProfileState"
+
+class "flutter_application_1::screens::NewSignIn.dart::SignInPageNew" {
+  +_SignInPageNewState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::NewSignIn.dart::SignInPageNew"
+
+class "flutter_application_1::screens::NewSignIn.dart::_SignInPageNewState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::NewSignIn.dart::_SignInPageNewState"
+
+class "flutter_application_1::screens::curse_add.dart::Curse_add" {
+  +State<Curse_add> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::curse_add.dart::Curse_add"
+
+class "flutter_application_1::screens::curse_add.dart::_Curse_addState" {
+  +bool isLoad
+  +String currentImage1
+  +void chooseRandomImage()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::curse_add.dart::_Curse_addState"
+
+class "flutter_application_1::screens::task_add.dart::Task_add" {
+  +String idCurs
+  +State<Task_add> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::task_add.dart::Task_add"
+
+class "flutter_application_1::screens::task_add.dart::_Task_addState" {
+  +String idCurs
+  +bool isLoad
+  -File? _selectedFile
+  +Widget build()
+}
+
+"flutter_application_1::screens::task_add.dart::_Task_addState" o-- "dart::io::File"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::task_add.dart::_Task_addState"
+
+class "flutter_application_1::screens::lending.dart::LandingPage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_application_1::screens::lending.dart::LandingPage"
+
+class "flutter_application_1::screens::favoritiesScreen.dart::FavoritesPage" {
+  +_FavoritesPageState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::favoritiesScreen.dart::FavoritesPage"
+
+class "flutter_application_1::screens::favoritiesScreen.dart::_FavoritesPageState" {
+  +void initState()
+  -void _loadFavorites()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::favoritiesScreen.dart::_FavoritesPageState"
+
+class "flutter_application_1::screens::settingsScreen.dart::SettingsPage1" {
+  +State<SettingsPage1> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::settingsScreen.dart::SettingsPage1"
+
+class "flutter_application_1::screens::settingsScreen.dart::_SettingsPage1State" {
+  +bool isTheme
+  +void initState()
+  -void _showBottomSheet()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::settingsScreen.dart::_SettingsPage1State"
+
+class "flutter_application_1::screens::settingsScreen.dart::_CustomListTile" {
+  +String title
+  +IconData icon
+  +Widget? trailing
+  +dynamic Function()? funct
+  +Widget build()
+}
+
+"flutter_application_1::screens::settingsScreen.dart::_CustomListTile" o-- "flutter::src::widgets::icon_data.dart::IconData"
+"flutter_application_1::screens::settingsScreen.dart::_CustomListTile" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter_application_1::screens::settingsScreen.dart::_CustomListTile" o-- "null::dynamic Function()"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_application_1::screens::settingsScreen.dart::_CustomListTile"
+
+class "flutter_application_1::screens::settingsScreen.dart::_SingleSection" {
+  +String title
+  +List<Widget> children
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_application_1::screens::settingsScreen.dart::_SingleSection"
+
+class "flutter_application_1::screens::connect_curss.dart::JoinCoursePage" {
+  +CollectionReference<Object?> curseStudentCollection
+  -TextEditingController _idCursecontroller
+  +Widget build()
+}
+
+"flutter_application_1::screens::connect_curss.dart::JoinCoursePage" o-- "cloud_firestore::cloud_firestore.dart::CollectionReference<Object>"
+"flutter_application_1::screens::connect_curss.dart::JoinCoursePage" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_application_1::screens::connect_curss.dart::JoinCoursePage"
+
+class "flutter_application_1::screens::about_app.dart::AboutAppPage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_application_1::screens::about_app.dart::AboutAppPage"
+
+class "flutter_application_1::screens::ProfileNewPage.dart::MyProfilePage" {
+  +_MyProfilePageState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::ProfileNewPage.dart::MyProfilePage"
+
+class "flutter_application_1::screens::ProfileNewPage.dart::_MyProfilePageState" {
+  +FirebaseAuth auth
+  +FirebaseFirestore firestore
+  -TextEditingController _fioController
+  +void initState()
+  -Future<void> _loadCurrentUserFio()
+  +Widget build()
+}
+
+"flutter_application_1::screens::ProfileNewPage.dart::_MyProfilePageState" o-- "firebase_auth::firebase_auth.dart::FirebaseAuth"
+"flutter_application_1::screens::ProfileNewPage.dart::_MyProfilePageState" o-- "cloud_firestore::cloud_firestore.dart::FirebaseFirestore"
+"flutter_application_1::screens::ProfileNewPage.dart::_MyProfilePageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::ProfileNewPage.dart::_MyProfilePageState"
+
+class "flutter_application_1::screens::reach_us.dart::ReachUs" {
+  +_ReachUsState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::reach_us.dart::ReachUs"
+
+class "flutter_application_1::screens::reach_us.dart::_ReachUsState" {
+  -Uri _url
+  -Uri _git
+  -Uri _telegram
+  +TextEditingController t1
+  +TextEditingController t2
+  +TextEditingController t3
+  +String name
+  +String message
+  +dynamic launchUrl()
+  +dynamic launchURLMail()
+  +void initState()
+  +void dispose()
+  +Widget build()
+}
+
+"flutter_application_1::screens::reach_us.dart::_ReachUsState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::reach_us.dart::_ReachUsState"
+
+class "flutter_application_1::screens::dateUser.dart::MyPage" {
+  +_MyPageState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::screens::dateUser.dart::MyPage"
+
+class "flutter_application_1::screens::dateUser.dart::_MyPageState" {
+  +bool toggleValue
+  +TextEditingController nameController
+  +Widget build()
+}
+
+"flutter_application_1::screens::dateUser.dart::_MyPageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::screens::dateUser.dart::_MyPageState"
+
+class "flutter_application_1::main.dart::MaxFitApp" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_application_1::main.dart::MaxFitApp"
+
+class "flutter_application_1::domain::class.dart::Classroom" {
+  +String title
+  +String author
+  +String description
+  +String level
+}
+
+class "flutter_application_1::domain::customButton.dart::ImageBackgroundButton" {
+  +String imagePath
+  +Function onPressed
+  +_ImageBackgroundButtonState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "flutter_application_1::domain::customButton.dart::ImageBackgroundButton"
+
+class "flutter_application_1::domain::customButton.dart::_ImageBackgroundButtonState" {
+  +bool isPressed
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "flutter_application_1::domain::customButton.dart::_ImageBackgroundButtonState"
+
+
+@enduml

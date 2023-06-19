@@ -4,7 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/dateUser.dart';
 import 'package:flutter_application_1/screens/home.dart';
+import 'package:flutter_application_1/screens/resetPassword.dart';
 
 class Autorization extends StatefulWidget {
   const Autorization({super.key});
@@ -109,6 +111,8 @@ class _AutorizationState extends State<Autorization> {
                 : await FirebaseAuth.instance.createUserWithEmailAndPassword(
                     email: _emailController.text,
                     password: _passwordController.text);
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MyPage()));
 
             if (showLogin == true) {
               Navigator.push(
@@ -233,6 +237,20 @@ class _AutorizationState extends State<Autorization> {
                             setState(() {
                               showLogin = false;
                             });
+                          }),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: GestureDetector(
+                          child: const Text(
+                            'Забыли пароль?',
+                            style: TextStyle(fontSize: 16, color: Colors.blue),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ResetPasswordPage()));
                           }),
                     )
                   ],

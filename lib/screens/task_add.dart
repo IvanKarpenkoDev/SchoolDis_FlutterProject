@@ -1,18 +1,25 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/screens/home.dart';
 import 'package:motion_toast/motion_toast.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart' as path;
 
 class Task_add extends StatefulWidget {
-  const Task_add({super.key});
-
+  const Task_add({super.key, required this.idCurs});
+  final String idCurs;
   @override
-  State<Task_add> createState() => _Task_addState();
+  State<Task_add> createState() => _Task_addState(idCurs);
 }
 
 late String _email;
+
 // ignore: unused_field
 late String _password;
 
@@ -48,7 +55,7 @@ Widget _label(String curseUid) {
 
 Widget _input(String hint, TextEditingController controller) {
   return Container(
-    padding: const EdgeInsets.only(bottom: 20,top: 10),
+    padding: const EdgeInsets.only(bottom: 20, top: 10),
     child: TextFormField(
       maxLines: 10, // <-- SEE HERE
       minLines: 2,
@@ -71,68 +78,104 @@ Widget _input(String hint, TextEditingController controller) {
 }
 
 class _Task_addState extends State<Task_add> {
-  bool isLoad = false;
+  final String idCurs;
+  _Task_addState(this.idCurs);
 
+  bool isLoad = false;
+  File? _selectedFile;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          toolbarHeight: 50,
-          backgroundColor: Color.fromRGBO(82, 179, 253, 1),
-          titleTextStyle: TextStyle(fontSize: 18, letterSpacing: 1),
-          title: Text('Schooldis'),
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back_ios_new_outlined)),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.account_circle_outlined),
-              iconSize: 35,
-              tooltip: 'Профиль',
-              onPressed: () {
-                // ScaffoldMessenger.of(context).showSnackBar(
-                //     const SnackBar(content: Text('Тут будет профиль')));
-                MotionToast.success(
-                  title: Text("Success Motion Toast"),
-                  description: Text("Example of success motion toast"),
-                ).show(context);
-              },
-            ),
-          ]),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                bottom: 50,
-              ), //apply padding to all four sides
-              child: Text("Добавление задания", style: TextStyle(fontSize: 23)),
-            ),
-            // Text("Добавление курса", style: TextStyle(fontSize: 23),),
+        appBar: AppBar(
+            toolbarHeight: 50,
+            titleTextStyle: TextStyle(fontSize: 18, letterSpacing: 1),
+            title: Text('Schooldis'),
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.arrow_back_ios_new_outlined)),
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.account_circle_outlined),
+                iconSize: 35,
+                tooltip: 'Профиль',
+                onPressed: () {
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //     const SnackBar(content: Text('Тут будет профиль')));
+                  MotionToast.success(
+                    title: Text("Success Motion Toast"),
+                    description: Text("Example of success motion toast"),
+                  ).show(context);
+                },
+              ),
+            ]),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  bottom: 50,
+                ), //apply padding to all four sides
+                child:
+                    Text("Добавление задания", style: TextStyle(fontSize: 23)),
+              ),
+              // Text("Добавление курса", style: TextStyle(fontSize: 23),),
+              _input("Задание", _name),
 
-            _input("Задание", _name),
-
-            isLoad
-                ? CircularProgressIndicator()
-                : Padding(
-                    padding: EdgeInsets.only(top: 80),
-                    child: ElevatedButton(
+              isLoad
+                  ? CircularProgressIndicator()
+                  : 
+            
+              ElevatedButton(
+                onPressed: () async {
+                  // Открываем диалоговое окно для выбора файла
+                  FilePickerResult? result =
+                      await FilePicker.platform.pickFiles();
+                  if (result != null) {
+                    setState(() {
+                      _selectedFile = File(result.files.single.path!);
+                    });
+                    MotionToast.success(
+                      description: Text("Файл был успешно выбран"),
+                    ).show(context);
+                  }
+                },
+                child: Container(
+                  height: 40,
+                  width: 140,
+                  child: const Center(
+                    child: Text(
+                      'Выбрать файл',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(7),
+                  ),
+                  // primary: Colors.blue,
+                ),
+              ),
+                SizedBox(height: 20),
+              ElevatedButton(
                       onPressed: () async {
                         setState(() {
                           isLoad = true;
                         });
                         FirebaseFirestore.instance
                             .collection('Curss')
-                            .doc('nNuYAcYIieX48qHeIQao')
+                            .doc(idCurs)
                             .collection("card_curss")
                             .add({
-                          "Description": _description.text,
                           "Name": _name.text,
                           "prepod":
-                              "/user/${FirebaseAuth.instance.currentUser?.uid}"
+                              "/user/${FirebaseAuth.instance.currentUser?.uid}",
+                          "file_url": _selectedFile != null
+                              ? _selectedFile!.path
+                              : null,
                         }).then((value) {
                           Future.delayed(Duration(seconds: 2));
                           Navigator.pop(context);
@@ -142,7 +185,6 @@ class _Task_addState extends State<Task_add> {
                         });
                         buttonAction();
                       },
-                      // ignore: sized_box_for_whitespace, sort_child_properties_last
                       child: Container(
                         height: 55,
                         width: 190,
@@ -160,10 +202,8 @@ class _Task_addState extends State<Task_add> {
                         // primary: Colors.blue,
                       ),
                     ),
-                  ),
-          ],
-        ),
-      ),
-    );
+            ],
+          ),
+        ));
   }
 }

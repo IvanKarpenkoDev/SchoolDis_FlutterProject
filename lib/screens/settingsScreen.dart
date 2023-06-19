@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/about_app.dart';
+import 'package:flutter_application_1/screens/reach_us.dart';
 import 'package:get/get.dart';
 
 class SettingsPage1 extends StatefulWidget {
@@ -13,13 +13,43 @@ class SettingsPage1 extends StatefulWidget {
 class _SettingsPage1State extends State<SettingsPage1> {
   bool isTheme = false;
 
-
   @override
   void initState() {
     isTheme = Get.theme.brightness == Brightness.dark;
     super.initState();
   }
 
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'SchoolDis',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200),
+                  ),
+                  SizedBox(width: 10),
+                  Image.asset(
+                    'assets/images/logo.png',
+                    scale: 2.1,
+                  )
+                ],
+              ),
+              Text(
+                'SchoolDis - это приложение предназначено к применению в различных учебных заведениях для возможности дистанционного обучения ',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w100),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,58 +65,41 @@ class _SettingsPage1State extends State<SettingsPage1> {
             children: [
               _SingleSection(
                 title: "Основные",
-                
                 children: [
-                   _CustomListTile(
+                  _CustomListTile(
                     title: "О приложении",
                     icon: Icons.info_outline,
-                    funct: () {
-                       Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => AboutAppPage()));
-                    },
-                    
-                  ),
-                  _CustomListTile(
-                      title: "Темная тема",
-                      icon: Icons.dark_mode_outlined,
-                      trailing: CupertinoSwitch(
-                          value:  isTheme,
-                          onChanged: (value) {
-                            setState(() {
-                              isTheme = !isTheme;
-                              Get.changeThemeMode(
-                                  isTheme ? ThemeMode.dark : ThemeMode.light);
-                            });
-                          })),
-                  const _CustomListTile(
-                      title: "Какая то настройка",
-                      icon: CupertinoIcons.cloud_download),
-                  const _CustomListTile(
-                      title: "Какая то настройка",
-                      icon: CupertinoIcons.lock_shield),
-                ],
-              ),
-              _SingleSection(
-                title: "Privacy and Security",
-                children: [
-                  _CustomListTile(
-                    title: "Какая то настройка",
-                    icon: CupertinoIcons.person_2,
-                    funct: () {
-                      print('aasdlaksd');
+                    onTap: () {
+                      _showBottomSheet(context);
                     },
                   ),
                   _CustomListTile(
-                      title: "Какая то настройка", icon: CupertinoIcons.lock),
+                    title: "Темная тема",
+                    icon: Icons.dark_mode_outlined,
+                    trailing: CupertinoSwitch(
+                      value: isTheme,
+                      onChanged: (value) {
+                        setState(() {
+                          isTheme = !isTheme;
+                          Get.changeThemeMode(
+                            isTheme ? ThemeMode.dark : ThemeMode.light,
+                          );
+                        });
+                      },
+                    ),
+                  ),
                   _CustomListTile(
-                      title: "Какая то настройка",
-                      icon: CupertinoIcons.brightness),
-                  _CustomListTile(
-                      title: "Какая то настройка",
-                      icon: CupertinoIcons.speaker_2),
-                  _CustomListTile(
-                      title: "Какая то настройка",
-                      icon: CupertinoIcons.paintbrush)
+                    title: "Поддержка",
+                    icon: Icons.contact_support_outlined,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ReachUs(),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ],
@@ -101,28 +114,31 @@ class _CustomListTile extends StatelessWidget {
   final String title;
   final IconData icon;
   final Widget? trailing;
-  final Function()? funct;
-  const _CustomListTile(
-      {Key? key,
-      required this.title,
-      required this.icon,
-      this.trailing,
-      this.funct})
-      : super(key: key);
+  final Function()? onTap;
+
+  const _CustomListTile({
+    Key? key,
+    required this.title,
+    required this.icon,
+    this.trailing,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        title: Text(title),
-        leading: Icon(icon),
-        trailing: trailing ?? const Icon(Icons.arrow_forward_ios, size: 18),
-        onTap: funct);
+      title: Text(title),
+      leading: Icon(icon),
+      trailing: trailing ?? const Icon(Icons.arrow_forward_ios, size: 18),
+      onTap: onTap,
+    );
   }
 }
 
 class _SingleSection extends StatelessWidget {
   final String title;
   final List<Widget> children;
+
   const _SingleSection({
     Key? key,
     required this.title,
@@ -140,13 +156,11 @@ class _SingleSection extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             title.toUpperCase(),
-            style:
-                Theme.of(context).textTheme.headline3?.copyWith(fontSize: 16),
+            style: Theme.of(context).textTheme.headline3?.copyWith(fontSize: 16),
           ),
         ),
         Container(
           width: double.infinity,
-         //color: Colors.white,
           child: Column(
             children: children,
           ),
